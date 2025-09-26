@@ -56,7 +56,7 @@ assert_eq!(b"Hello world!\n", &*reader.bytes().collect::<Result<Vec<_>, _>>()?);
 
 ## Stable disk format
 
-The disk format is stable as of v1.
+The disk format will be stable as of 1.0.0.
 
 Future breaking changes will result in a major version bump.
 
