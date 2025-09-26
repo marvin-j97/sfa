@@ -76,10 +76,13 @@ Future breaking changes will result in a major version bump.
 ...
 [trailer]
 [magic, 4 bytes]
+; TODO: put version here, change magic(s)    
 [checksum type, 1 byte, always 0x0]
 [toc checksum, 16 bytes]
 [toc_pointer, 8 bytes]
 ```
+
+<!-- TODO: store ToC len (in bytes) in trailer -->
 
 All integers are little-endian encoded.
 
