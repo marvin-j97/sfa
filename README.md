@@ -67,18 +67,18 @@ Future breaking changes will result in a major version bump.
 [section2]
   ??? (section2 content)
 [toc]
-[magic; 4 bytes]
-[len; 4 bytes]
-  <section pos; 8 bytes>
-  <section len; 8 bytes>
-  <section name len = N; 2 bytes>
-  <section name; N bytes>
+[magic, 4 bytes]
+[len, 4 bytes]
+  <section pos, 8 bytes>
+  <section len, 8 bytes>
+  <section name, len = N, 2 bytes>
+  <section name, N bytes>
 ...
 [trailer]
-[magic; 4 bytes]
-[checksum type; 1 byte, always 0x0]
-[toc checksum; 16 bytes]
-[toc_pointer; 8 bytes]
+[magic, 4 bytes]
+[checksum type, 1 byte, always 0x0]
+[toc checksum, 16 bytes]
+[toc_pointer, 8 bytes]
 ```
 
 All integers are little-endian encoded.
