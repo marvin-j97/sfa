@@ -1,10 +1,10 @@
+use sfa::{Reader, Writer};
 use std::io::{Read, Write};
-use tft::{Reader, Writer};
 
 #[test]
-pub fn cherry_pie() -> Result<(), tft::Error> {
+pub fn cherry_pie() -> Result<(), sfa::Error> {
     let dir = tempfile::tempdir()?;
-    let path = dir.path().join("cherry_pie.tft");
+    let path = dir.path().join("cherry_pie");
 
     let mut writer = Writer::new_at_path(&path)?;
     writer.start("Verse 1")?;

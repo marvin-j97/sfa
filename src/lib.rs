@@ -2,15 +2,15 @@
 // This source code is licensed under both the Apache 2.0 and MIT License
 // (found in the LICENSE-* files in the repository)
 
-//! *TFT* is a minimal, flat file archive encoding/decoding library for Rust.
+//! *SFA* (**s**imple **f**ile-**b**ased **a**rchive) is a minimal, flat file archive encoding/decoding library for Rust.
 //!
 //! The file can be segmented into multiple sections (similar to a zip file), and individual sections accessed as a [`std::io::Read`].
 //!
 //! ```
-//! use tft::{Writer, Reader};
+//! use sfa::{Writer, Reader};
 //! use std::io::{Read, Write};
 //! # let dir = tempfile::tempdir()?;
-//! # let path = dir.path().join("hello.tft");
+//! # let path = dir.path().join("hello.sfa");
 //!
 //! let mut writer = Writer::new_at_path(&path)?;
 //! writer.start("Section 1")?;
@@ -27,11 +27,11 @@
 //! let reader = toc[0].buf_reader(&path).unwrap();
 //! assert_eq!(b"Hello world!\n", &*reader.bytes().collect::<Result<Vec<_>, _>>()?);
 //! #
-//! # Ok::<(), tft::Error>(())
+//! # Ok::<(), sfa::Error>(())
 //! ```
 
-// #![doc(html_logo_url = "https://raw.githubusercontent.com/fjall-rs/lsm-tree/main/logo.png")]
-// #![doc(html_favicon_url = "https://raw.githubusercontent.com/fjall-rs/lsm-tree/main/logo.png")]
+// #![doc(html_logo_url = "https://raw.githubusercontent.com/fjall-rs/sfa/main/logo.png")]
+// #![doc(html_favicon_url = "https://raw.githubusercontent.com/fjall-rs/sfa/main/logo.png")]
 #![deny(clippy::all, missing_docs, clippy::cargo)]
 #![deny(clippy::unwrap_used)]
 #![deny(clippy::indexing_slicing)]

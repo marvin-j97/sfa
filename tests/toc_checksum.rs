@@ -1,12 +1,12 @@
-use tft::Reader;
+use sfa::Reader;
 
 #[test]
-pub fn cherry_pie_invalid_checksum() -> Result<(), tft::Error> {
-    let path = "test_fixture/cherry_pie_broken.tft";
+pub fn cherry_pie_invalid_checksum() -> Result<(), sfa::Error> {
+    let path = "test_fixture/cherry_pie_broken";
 
     assert!(matches!(
         Reader::new(path),
-        Err(tft::Error::ChecksumMismatch { .. })
+        Err(sfa::Error::ChecksumMismatch { .. })
     ));
 
     Ok(())

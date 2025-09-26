@@ -1,25 +1,22 @@
 <p align="center">
-  <a href="https://github.com/fjall-rs/tft/actions/workflows/test.yml">
-      <img src="https://github.com/fjall-rs/tft/actions/workflows/test.yml/badge.svg" alt="CI" />
+  <a href="https://github.com/fjall-rs/sfa/actions/workflows/test.yml">
+      <img src="https://github.com/fjall-rs/sfa/actions/workflows/test.yml/badge.svg" alt="CI" />
   </a>
-  <a href="https://docs.rs/tft">
-    <img src="https://img.shields.io/docsrs/tft?color=green" alt="docs.rs" />
+  <a href="https://docs.rs/sfa">
+    <img src="https://img.shields.io/docsrs/sfa?color=green" alt="docs.rs" />
   </a>
-  <a href="https://crates.io/crates/tft">
-    <img src="https://img.shields.io/crates/v/tft?color=blue" alt="Crates.io" />
+  <a href="https://crates.io/crates/sfa">
+    <img src="https://img.shields.io/crates/v/sfa?color=blue" alt="Crates.io" />
   </a>
   <img src="https://img.shields.io/badge/MSRV-1.80.0-blue" alt="MSRV" />
-  <a href="https://deps.rs/repo/github/fjall-rs/tft">
-    <img src="https://deps.rs/repo/github/fjall-rs/tft/status.svg" alt="dependency status" />
+  <a href="https://deps.rs/repo/github/fjall-rs/sfa">
+    <img src="https://deps.rs/repo/github/fjall-rs/sfa/status.svg" alt="dependency status" />
   </a>
 </p>
 
-> [!WARNING]
-> Name TBD
+*SFA* (**s**imple **f**ile **a**rchive) is a minimal, flat file archive encoding/decoding library for Rust.
 
-*TFT* is a minimal, flat file archive encoding/decoding library for Rust.
-
-The file can be segmented into multiple sections (similar to a zip file), and individual sections accessed as a `std::io::Read`.
+The file can be segmented into multiple sections (similar to a zip file), and individual sections accessed as a `std::io::Read` or `(offset, len)` tuples.
 
 ## Sponsors
 
@@ -34,11 +31,11 @@ The file can be segmented into multiple sections (similar to a zip file), and in
 ## Basic usage
 
 ```bash
-cargo add tft
+cargo add sfa
 ```
 
 ```rust
-use tft::{Writer, Reader};
+use sfa::{Writer, Reader};
 use std::io::{Read, Write};
 
 let mut writer = Writer::new_at_path(&path)?;

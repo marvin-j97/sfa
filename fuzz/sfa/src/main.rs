@@ -2,14 +2,14 @@
 extern crate afl;
 
 use arbitrary::{Arbitrary, Unstructured};
+use sfa::{Reader, Writer};
 use std::collections::HashSet;
 use std::io::{Read, Write};
-use tft::{Reader, Writer};
 
 fn main() {
     fuzz!(|data: &[u8]| {
         let dir = tempfile::tempdir().unwrap();
-        let path = dir.path().join("file.tft");
+        let path = dir.path().join("file.sfa");
 
         let mut u = Unstructured::new(data);
 

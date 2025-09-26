@@ -1,5 +1,5 @@
 [package]
-name = "tft-fuzz"
+name = "sfa-fuzz"
 version = "1.0.0"
 edition = "2021"
 publish = false
@@ -8,5 +8,5 @@ publish = false
 afl = "*"
 arbitrary = "1"
 libfuzzer-sys = "0.4"
-tft = { path = "../.." }
+sfa = { path = "../.." }
 tempfile = "3.23.0"

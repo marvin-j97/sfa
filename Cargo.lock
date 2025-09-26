@@ -261,6 +261,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "sfa"
+version = "0.0.1"
+dependencies = [
+ "byteorder-lite",
+ "log",
+ "tempfile",
+ "test-log",
+ "xxhash-rust",
+]
+
+[[package]]
 name = "sharded-slab"
 version = "0.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -313,17 +324,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
-]
-
-[[package]]
-name = "tft"
-version = "0.0.1"
-dependencies = [
- "byteorder-lite",
- "log",
- "tempfile",
- "test-log",
- "xxhash-rust",
 ]
 
 [[package]]

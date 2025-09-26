@@ -127,7 +127,7 @@ mod tests {
     #[test]
     fn writer_empty() -> crate::Result<()> {
         let dir = tempfile::tempdir()?;
-        let path = dir.path().join("file.tft");
+        let path = dir.path().join("file.sfa");
 
         let writer = Writer::new_at_path(&path)?;
         writer.finish()?;
@@ -147,7 +147,7 @@ mod tests {
     #[test]
     fn writer_simple() -> crate::Result<()> {
         let dir = tempfile::tempdir()?;
-        let path = dir.path().join("file.tft");
+        let path = dir.path().join("file.sfa");
 
         let data = b"hello world";
 
@@ -174,7 +174,7 @@ mod tests {
     #[test]
     fn writer_multiple_sections() -> crate::Result<()> {
         let dir = tempfile::tempdir()?;
-        let path = dir.path().join("file.tft");
+        let path = dir.path().join("file.sfa");
 
         let data = b"hello world";
         let data2 = b"hello world2";
