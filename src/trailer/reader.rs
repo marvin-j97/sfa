@@ -8,7 +8,7 @@ use byteorder::ReadBytesExt;
 use std::io::{Read, Seek, SeekFrom};
 
 #[allow(clippy::cast_possible_wrap)]
-const TRAILER_SIZE: i64 = TRAILER_MAGIC.len() as i64 + 1 + 16 + 8;
+const TRAILER_SIZE: i64 = TRAILER_MAGIC.len() as i64 + 1 + 1 + 16 + 8 + 8;
 
 #[derive(Debug, Eq, PartialEq)]
 pub struct ParsedTrailer {
@@ -31,6 +31,14 @@ impl TrailerReader {
             reader.read_exact(&mut buf)?;
 
             if buf != TRAILER_MAGIC {
+                log::error!("Invalid trailer header");
+                return Err(crate::Error::InvalidHeader);
+            }
+        }
+
+        {
+            let version = reader.read_u8()?;
+            if version != 0x1 {
                 log::error!("Invalid version");
                 return Err(crate::Error::InvalidVersion);
             }
@@ -46,6 +54,7 @@ impl TrailerReader {
 
         let toc_checksum = Checksum::from_raw(reader.read_u128::<LE>()?);
         let toc_pos = reader.read_u64::<LE>()?;
+        // let _toc_len = reader.read_u64::<LE>()?;
 
         Ok(ParsedTrailer {
             toc_checksum,

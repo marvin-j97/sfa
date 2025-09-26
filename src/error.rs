@@ -10,6 +10,9 @@ pub enum Error {
     /// IO error
     Io(std::io::Error),
 
+    /// Invalid header
+    InvalidHeader,
+
     /// Unsupported file format version
     InvalidVersion,
 

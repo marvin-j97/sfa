@@ -6,7 +6,7 @@ use crate::{checksum::Checksum, toc::entry::TocEntry};
 use byteorder::WriteBytesExt;
 use std::io::Write;
 
-pub const TOC_MAGIC: &[u8] = b"TOC1";
+pub const TOC_MAGIC: &[u8] = b"TOC!";
 
 struct ChecksummedWriter<W: std::io::Write> {
     inner: W,

@@ -102,8 +102,11 @@ impl Writer {
         let toc_pos = self.writer.stream_position()?;
         let toc_checksum = TocWriter::write_into(&mut self.writer, &self.toc)?;
 
+        let after_toc_pos = self.writer.stream_position()?;
+        let toc_len = after_toc_pos - toc_pos;
+
         // Write trailer
-        TrailerWriter::write_into(&mut self.writer, toc_checksum, toc_pos)?;
+        TrailerWriter::write_into(&mut self.writer, toc_checksum, toc_pos, toc_len)?;
 
         // Flush & sync
         log::trace!("Syncing file");

@@ -5,6 +5,7 @@ use std::io::{Read, Write};
 pub fn cherry_pie() -> Result<(), sfa::Error> {
     let dir = tempfile::tempdir()?;
     let path = dir.path().join("cherry_pie");
+    // let path = std::path::Path::new("test_fixture/cherry_pie_broken");
 
     let mut writer = Writer::new_at_path(&path)?;
     writer.start("Verse 1")?;
