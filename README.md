@@ -8,7 +8,7 @@
   <a href="https://crates.io/crates/tft">
     <img src="https://img.shields.io/crates/v/tft?color=blue" alt="Crates.io" />
   </a>
-  <img src="https://img.shields.io/badge/MSRV-1.79.0-blue" alt="MSRV" />
+  <img src="https://img.shields.io/badge/MSRV-1.80.0-blue" alt="MSRV" />
   <a href="https://deps.rs/repo/github/fjall-rs/tft">
     <img src="https://deps.rs/repo/github/fjall-rs/tft/status.svg" alt="dependency status" />
   </a>

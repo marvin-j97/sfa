@@ -10,7 +10,7 @@ repository = "https://github.com/fjall-rs/tft"
 homepage = "https://github.com/fjall-rs/tft"
 keywords = ["file archive"]
 categories = ["filesystem"]
-rust-version = "1.79"
+rust-version = "1.80"
 # TODO: find a name
 publish = false
 
