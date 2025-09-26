@@ -1,0 +1,28 @@
+[package]
+name = "tft"
+description = "A minimal, flat file archive encoding/decoding library"
+version = "0.0.1"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+include = ["src/**/*", "LICENSE-APACHE", "LICENSE-MIT", "README.md"]
+repository = "https://github.com/fjall-rs/tft"
+homepage = "https://github.com/fjall-rs/tft"
+keywords = ["file archive"]
+categories = ["filesystem"]
+rust-version = "1.79"
+# TODO: find a name
+publish = false
+
+[lib]
+name = "tft"
+path = "src/lib.rs"
+
+[dependencies]
+byteorder = { package = "byteorder-lite", version = "0.1.0" }
+log = "0.4.21"
+xxhash-rust = { version = "0.8.15", features = ["xxh3"] }
+
+[dev-dependencies]
+test-log = "0.2.16"
+tempfile = "3.10.1"
