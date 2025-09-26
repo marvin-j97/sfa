@@ -14,6 +14,9 @@
   </a>
 </p>
 
+> [!WARNING]
+> Name TBD
+
 *TFT* is a minimal, flat file archive encoding/decoding library for Rust.
 
 The file can be segmented into multiple sections (similar to a zip file), and individual sections accessed as a `std::io::Read`.
