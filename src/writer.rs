@@ -33,12 +33,17 @@ impl Writer {
     pub fn new_at_path(path: impl Into<PathBuf>) -> crate::Result<Self> {
         let path = std::path::absolute(path.into())?;
         let file = File::create_new(&path)?;
-        Ok(Self::into_writer(BufWriter::new(file)))
+        Ok(Self::from_writer(BufWriter::new(file)))
+    }
+
+    /// Returns a mutable reference to the underlying writer.
+    pub fn get_mut(&mut self) -> &mut BufWriter<File> {
+        &mut self.writer
     }
 
     /// Creates a new writer with the given I/O writer.
     #[must_use]
-    pub fn into_writer(writer: BufWriter<File>) -> Self {
+    pub fn from_writer(writer: BufWriter<File>) -> Self {
         Self {
             writer,
             last_section_pos: 0,
