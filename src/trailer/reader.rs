@@ -19,7 +19,7 @@ pub struct ParsedTrailer {
 pub struct TrailerReader;
 
 impl TrailerReader {
-    pub fn read_from_file<R: Read + Seek>(reader: &mut R) -> Result<ParsedTrailer> {
+    pub fn from_reader<R: Read + Seek>(reader: &mut R) -> Result<ParsedTrailer> {
         use byteorder::LE;
 
         log::trace!("Reading trailer");

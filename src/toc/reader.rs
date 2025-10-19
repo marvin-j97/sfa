@@ -43,7 +43,7 @@ impl<R: std::io::Read> std::io::Read for ChecksummedReader<R> {
 pub struct TocReader;
 
 impl TocReader {
-    pub fn read_from_file<R: Read + Seek>(
+    pub fn from_reader<R: Read + Seek>(
         reader: &mut R,
         toc_pos: u64,
         toc_checksum: Checksum,
