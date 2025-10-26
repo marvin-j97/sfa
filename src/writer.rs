@@ -106,7 +106,7 @@ impl Writer {
         let toc_len = after_toc_pos - toc_pos;
 
         // Write trailer
-        TrailerWriter::write_into(&mut writer, toc_checksum, toc_pos, toc_len)
+        TrailerWriter::write_into(writer, toc_checksum, toc_pos, toc_len)
     }
 
     /// Finishes the file.
