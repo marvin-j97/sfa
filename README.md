@@ -8,7 +8,7 @@
   <a href="https://crates.io/crates/sfa">
     <img src="https://img.shields.io/crates/v/sfa?color=blue" alt="Crates.io" />
   </a>
-  <img src="https://img.shields.io/badge/MSRV-1.80.0-blue" alt="MSRV" />
+  <img src="https://img.shields.io/badge/MSRV-1.89.0-blue" alt="MSRV" />
   <a href="https://deps.rs/repo/github/fjall-rs/sfa">
     <img src="https://deps.rs/repo/github/fjall-rs/sfa/status.svg" alt="dependency status" />
   </a>

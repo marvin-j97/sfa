@@ -10,7 +10,7 @@ repository = "https://github.com/fjall-rs/sfa"
 homepage = "https://github.com/fjall-rs/sfa"
 keywords = ["file-archive"]
 categories = ["filesystem"]
-rust-version = "1.80"
+rust-version = "1.89"
 publish = true
 
 [lib]
