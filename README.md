@@ -41,7 +41,7 @@ use std::io::{Read, Write};
 let mut writer = Writer::new_at_path(&path)?;
 writer.start("Section 1")?;
 writer.write_all(b"Hello world!\n")?;
-writer.finish()?;
+let _file_checksum = writer.finish()?;
 // If on Unix, you probably want to fsync the directory here
 
 let reader = Reader::new(&path)?;

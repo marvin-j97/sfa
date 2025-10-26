@@ -3,11 +3,13 @@
 // (found in the LICENSE-* files in the repository)
 
 use crate::{
+    checksum_writer::ChecksummedWriter,
     toc::{
         entry::{SectionName, TocEntry},
         writer::TocWriter,
     },
     trailer::writer::TrailerWriter,
+    Checksum,
 };
 use std::{
     fs::File,
@@ -18,7 +20,7 @@ use std::{
 /// Archive writer
 #[allow(clippy::struct_field_names)]
 pub struct Writer {
-    writer: BufWriter<File>,
+    writer: ChecksummedWriter<BufWriter<File>>,
     last_section_pos: u64,
     section_name: SectionName,
     toc: Vec<TocEntry>,
@@ -37,15 +39,15 @@ impl Writer {
     }
 
     /// Returns a mutable reference to the underlying writer.
-    pub fn get_mut(&mut self) -> &mut BufWriter<File> {
-        &mut self.writer
+    pub fn get_mut(&mut self) -> impl Write + Seek + '_ {
+        self.writer.inner()
     }
 
     /// Creates a new writer with the given I/O writer.
     #[must_use]
     pub fn from_writer(writer: BufWriter<File>) -> Self {
         Self {
-            writer,
+            writer: ChecksummedWriter::new(writer),
             last_section_pos: 0,
             section_name: SectionName::new(),
             toc: Vec::new(),
@@ -76,7 +78,7 @@ impl Writer {
     }
 
     fn append_toc_entry(&mut self) -> std::io::Result<()> {
-        let file_pos = self.writer.stream_position()?;
+        let file_pos = self.writer.inner().stream_position()?;
 
         if file_pos > 0 {
             let name = std::mem::take(&mut self.section_name);
@@ -92,34 +94,40 @@ impl Writer {
         Ok(())
     }
 
+    fn append_trailer(
+        mut writer: &mut ChecksummedWriter<BufWriter<File>>,
+        toc: &[TocEntry],
+    ) -> crate::Result<()> {
+        // Write ToC
+        let toc_pos = writer.inner().stream_position()?;
+        let toc_checksum = TocWriter::write_into(&mut writer, toc)?;
+
+        let after_toc_pos = writer.inner().stream_position()?;
+        let toc_len = after_toc_pos - toc_pos;
+
+        // Write trailer
+        TrailerWriter::write_into(&mut writer, toc_checksum, toc_pos, toc_len)
+    }
+
     /// Finishes the file.
+    ///
+    /// Returns a full-file checksum.
     ///
     /// # Errors
     ///
     /// Returns error, if an IO error occurred.
     #[allow(clippy::missing_panics_doc)]
-    pub fn finish(mut self) -> crate::Result<()> {
-        log::trace!("Finishing file");
-
+    pub fn finish(mut self) -> crate::Result<Checksum> {
         self.append_toc_entry()?;
-
-        // Write ToC
-        let toc_pos = self.writer.stream_position()?;
-        let toc_checksum = TocWriter::write_into(&mut self.writer, &self.toc)?;
-
-        let after_toc_pos = self.writer.stream_position()?;
-        let toc_len = after_toc_pos - toc_pos;
-
-        // Write trailer
-        TrailerWriter::write_into(&mut self.writer, toc_checksum, toc_pos, toc_len)?;
+        Self::append_trailer(&mut self.writer, &self.toc)?;
 
         // Flush & sync
         log::trace!("Syncing file");
 
         self.writer.flush()?;
-        self.writer.get_mut().sync_all()?;
+        self.writer.inner().get_mut().sync_all()?;
 
-        Ok(())
+        Ok(self.writer.checksum())
     }
 }
 
